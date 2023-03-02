@@ -16,3 +16,4 @@ struct Account {
     vector <string> diseaseDate;
     int stayDay;
 };
+
