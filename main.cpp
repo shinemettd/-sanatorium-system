@@ -1,39 +1,28 @@
-#include "headers\database.h"
+#include "headers\manager.h"
 
-bool isTypeCorrect(string enterType) {
-    
-    if (enterType == "director" ||  enterType == "manager" || enterType == "personal" || enterType == "patient") {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-bool loginCorrect (string enterType, string enterLogin, string enterPassword, vector<Account>& data, int peopleCount) {
+void countBeingTreated(vector<Account>& data, int peopleCount, int &beingTreatedCount) {
     for (int i = 0; i < peopleCount; i++) {
-        if (enterLogin == data[i].login) {
-            if (enterType == data[i].type && enterPassword == data[i].password){
-                cout << "Добро пожаловать в систему!" << endl;
-                return true;
-            }
-            else {
-                return false;
-            }
+        if (data[i].type == "patient" && data[i].client.beingTreated == true){
+            beingTreatedCount++;
         }
     }
-    return false;
 }
-
 
 void showPersonal (int peopleCount, vector<Account>& data) {
     for (int i = 0; i < peopleCount; i++) {
-        cout << data[i].type << " " << data[i].login << " " << data[i].password << " " << data[i].name << " " << data[i].surname << " " << data[i].height << " "<< data[i].birthday << " " << data[i].weight << " " << data[i].ID << " " << endl;
+        cout << "\t"
+            << data[i].ID << " | "
+            << data[i].type << " | " 
+            << data[i].login << " | " 
+            << data[i].password << " | " 
+            << data[i].name << " | " 
+            << data[i].surname << " | " 
+            << data[i].height << " | "
+            << data[i].weight << " | " 
+            << data[i].birthday << " | " 
+            << endl;
     }
-}
-
-bool isLoginCorrect(string type, string login, vector<Account>& data) {
-    return true;
+    cout << endl << endl;
 }
 
 int main()
@@ -41,22 +30,28 @@ int main()
     int peopleCount = 11; //just for primary code testing.
     vector <Account> data(peopleCount); 
     dataBase(data);
-    showPersonal(peopleCount, data);
-    
+    //showPersonal(peopleCount, data);
     bool typeStatus = false;
     bool loginStatus = false;
-    bool passwordStatus = false;
+    bool programStatus = true;
+    char access;
     string enterType, enterLogin, enterPassword;
-    int checkId;
+    int actualId;
+    int userEnter;
+    int clientCount = 5;
+    int beingTreatedCount = 0;
+
+    countBeingTreated(data, peopleCount, beingTreatedCount);
     
-    cout << "Приветствуем вас! Введите пожалуйста тип аккаунта:" << endl;
+    cout << "Введите пожалуйста тип аккаунта:" << endl;
     while (typeStatus == false) {
         
         cin >> enterType;
+        system("cls");
         
         enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from type
         
-        if (isTypeCorrect(enterType)) {
+        if (isTypeCorrect(enterType, access)) {
             typeStatus = true;
         }
         else {
@@ -70,18 +65,35 @@ int main()
         cin >> enterLogin;
         cout << "Введите пароль: " << endl;
         cin >> enterPassword;
+        system("cls");
         
         enterLogin.erase(remove(enterLogin.begin(), enterLogin.end(), ' '), enterLogin.end()); //deleting possible accidental spaces from login
         enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from password
         
-        if (loginCorrect(enterType, enterLogin, enterPassword, data, peopleCount)) {
+        if (loginCorrect(enterType, enterLogin, enterPassword, data, peopleCount, actualId)) {
             loginStatus = true;
         }
         else {
-            cout << "Неверный логин или пароль!" << endl;
+            cout << "Неверный логин или пароль" << endl;
         }
         
     } 
+    
+    system("cls");
+    cout << "Добро пожаловать в систему, " << data[actualId].surname << " " << data[actualId].name << "!" << endl;
+    cout << "Ваш доступ: " << access << endl;
 
+    switch(access) {
+        case '2': 
+        {
+            managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount);
+            break;
+        }
+        default:
+        {
+            cout << "Error";
+        }
+    }
+    system("pause");
     return 0;
 }

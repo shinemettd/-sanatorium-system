@@ -1,3 +1,4 @@
+#pragma once
 #include "libraries.h"
 
 struct Account {
@@ -10,10 +11,14 @@ struct Account {
     int weight;
     string birthday;
     int ID;
+
+    struct Client {
+    int stayDay;
+    bool beingTreated;
     vector <string> visitHistory;
-    vector <string> payingHistory;
+    vector <int> payingHistory;
     vector <string> diseaseName;
     vector <string> diseaseDate;
-    int stayDay;
+    } client;
 };
 
