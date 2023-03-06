@@ -1,10 +1,13 @@
 #include "headers\manager.h"
 
-void countBeingTreated(vector<Account>& data, int peopleCount, int &beingTreatedCount) {
+void countTreatedPeople(vector<Account>& data, int peopleCount, int &beingTreatedCount, int &wasTreatedCount) {
     for (int i = 0; i < peopleCount; i++) {
-        if (data[i].type == "patient" && data[i].client.beingTreated == true){
-            beingTreatedCount++;
-        }
+        if (data[i].type == "patient"){
+            wasTreatedCount++;
+            if (data[i].client.beingTreated == true) {
+                beingTreatedCount++;
+            }
+        } 
     }
 }
 
@@ -29,7 +32,7 @@ int main()
 {
     int peopleCount = 11; //just for primary code testing.
     vector <Account> data(peopleCount); 
-    dataBase(data);
+    dataBase(data); //filling database
     //showPersonal(peopleCount, data);
     bool typeStatus = false;
     bool loginStatus = false;
@@ -38,62 +41,70 @@ int main()
     string enterType, enterLogin, enterPassword;
     int actualId;
     int userEnter;
-    int clientCount = 5;
+    int clientCount = 5; //just for primary code testing.
     int beingTreatedCount = 0;
-
-    countBeingTreated(data, peopleCount, beingTreatedCount);
+    int wasTreatedCount = 0;
+    int personalCount;
+    string strUserEnter;
+    bool systemOn = true;
     
-    cout << "Введите пожалуйста тип аккаунта:" << endl;
-    while (typeStatus == false) {
+    while (systemOn == true) {  
         
-        cin >> enterType;
+        countTreatedPeople(data, peopleCount, beingTreatedCount, wasTreatedCount);
+        personalCount = peopleCount - wasTreatedCount;
+        
+        cout << "Введите пожалуйста тип аккаунта:" << endl << endl << ">> ";
+        while (typeStatus == false) {
+            
+            cin >> enterType;
+            system("cls");
+            
+            enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from type
+            
+            if (isTypeCorrect(enterType, access)) {
+                typeStatus = true;
+            }
+            else {
+                cout << "Неверный тип аккаунта! Повторите еще раз: " << endl << endl << " >> ";
+            }
+        }
+        
+        while (loginStatus == false) {
+            
+            cout << "Введите логин: " << endl << ">> ";
+            cin >> enterLogin;
+            cout << "Введите пароль: " << endl << ">> ";
+            cin >> enterPassword;
+            system("cls");
+            
+            enterLogin.erase(remove(enterLogin.begin(), enterLogin.end(), ' '), enterLogin.end()); //deleting possible accidental spaces from login
+            enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from password
+            
+            if (isLoginCorrect(enterType, enterLogin, enterPassword, data, peopleCount, actualId)) {
+                loginStatus = true;
+            }
+            else {
+                cout << "Неверный логин или пароль" << endl;
+            }
+            
+        } 
+        
         system("cls");
-        
-        enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from type
-        
-        if (isTypeCorrect(enterType, access)) {
-            typeStatus = true;
-        }
-        else {
-            cout << "Неверный тип аккаунта! Повторите еще раз: " << endl;
-        }
-    }
-    
-    while (loginStatus == false) {
-        
-        cout << "Введите логин: " << endl;
-        cin >> enterLogin;
-        cout << "Введите пароль: " << endl;
-        cin >> enterPassword;
-        system("cls");
-        
-        enterLogin.erase(remove(enterLogin.begin(), enterLogin.end(), ' '), enterLogin.end()); //deleting possible accidental spaces from login
-        enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from password
-        
-        if (loginCorrect(enterType, enterLogin, enterPassword, data, peopleCount, actualId)) {
-            loginStatus = true;
-        }
-        else {
-            cout << "Неверный логин или пароль" << endl;
-        }
-        
-    } 
-    
-    system("cls");
-    cout << "Добро пожаловать в систему, " << data[actualId].surname << " " << data[actualId].name << "!" << endl;
-    cout << "Ваш доступ: " << access << endl;
+        cout << "Добро пожаловать в систему, " << data[actualId].surname << " " << data[actualId].name << "!" << endl;
+        cout << "Ваш доступ: " << access << endl;
 
-    switch(access) {
-        case '2': 
-        {
-            managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount);
-            break;
+        switch(access) {
+            case '2': 
+            {
+                managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter);
+                break;
+            }
+            default:
+            {
+                cout << "Error";
+            }
         }
-        default:
-        {
-            cout << "Error";
-        }
+        system("pause");
     }
-    system("pause");
     return 0;
 }

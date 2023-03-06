@@ -24,7 +24,7 @@ bool isTypeCorrect(string enterType, char &access) {
 }
 
 //checking the correct input data and also comparing status of entered type of account and actual type of account 
-bool loginCorrect (string enterType, string enterLogin, string enterPassword, vector<Account>& data, int peopleCount, int &actualId) {
+bool isLoginCorrect (string enterType, string enterLogin, string enterPassword, vector<Account>& data, int peopleCount, int &actualId) {
     for (int i = 0; i < peopleCount; i++) {
         if (enterLogin == data[i].login) {
             if (enterType == data[i].type && enterPassword == data[i].password){
