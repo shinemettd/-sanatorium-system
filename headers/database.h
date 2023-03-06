@@ -1,5 +1,6 @@
 #pragma once
 #include "struct.h"
+#include "prices.h"
 
 //today is 17.03.2023
 
@@ -76,7 +77,7 @@ void dataBase (vector<Account>& data) {
     data[6].ID = 6;
     data[6].client.stayDay = 23;
     data[6].client.beingTreated = false;
-    data[6].client.visitHistory = {};
+    data[6].client.visitHistory = {"21.01.2023", "27.01.2023", "04.02.2023"};
     data[6].client.payingHistory = {};
     data[6].client.diseaseName = {};
     data[6].client.diseaseDate = {};
@@ -92,7 +93,7 @@ void dataBase (vector<Account>& data) {
     data[7].ID = 7;
     data[7].client.stayDay = 6;
     data[7].client.beingTreated = true;
-    data[7].client.visitHistory = {};
+    data[7].client.visitHistory = {"02.03.2023", "12.03.2023"};
     data[7].client.payingHistory = {};
     data[7].client.diseaseName = {};
     data[7].client.diseaseDate = {};
@@ -108,10 +109,10 @@ void dataBase (vector<Account>& data) {
     data[8].ID = 8;
     data[8].client.stayDay = 17;
     data[8].client.beingTreated = true;
-    data[8].client.visitHistory = {};
-    data[8].client.payingHistory = {};
-    data[8].client.diseaseName = {};
-    data[8].client.diseaseDate = {};  
+    data[8].client.visitHistory = {"01.03.2023", "04.03.2023", "11.03.2023"};
+    data[8].client.payingHistory = {25, 25, 25};
+    data[8].client.diseaseName = {"Бронхиальная астма"};
+    data[8].client.diseaseDate = {"04.03.2023", "11.03.2023", "18.03.2023", "25.03.2023"};  
 
     data[9].type = "patient";
     data[9].login = "homelander";
@@ -124,10 +125,10 @@ void dataBase (vector<Account>& data) {
     data[9].ID = 9;
     data[9].client.stayDay = 1;
     data[9].client.beingTreated = false;
-    data[9].client.visitHistory = {};
-    data[9].client.payingHistory = {};
-    data[9].client.diseaseName = {};
-    data[9].client.diseaseDate = {};
+    data[9].client.visitHistory = {"14.07.2021", "15.07.2021", "17.07.2021", "19.07.2021", "26.07.2021", "02.08.2021", "01.09.2021"};
+    data[9].client.payingHistory = {30 + 35, 30 + 35, 30 + 35, 30 + 35, 30 + 35, 30 + 35, 30 + 35};
+    data[9].client.diseaseName = {"Импотенция", "Кардиопатия"};
+    data[9].client.diseaseDate = {"15.07.2021", "17.07.2021", "19.07.2021", "26.07.2021", "02.08.2021", "01.09.2021"};
 
     data[10].type = "patient";
     data[10].login = "natsuki1998";
@@ -140,7 +141,7 @@ void dataBase (vector<Account>& data) {
     data[10].ID = 10;
     data[10].client.stayDay = 25;
     data[10].client.beingTreated = true;
-    data[10].client.visitHistory = {};
+    data[10].client.visitHistory = {"01.01.2023", "15.01.2023", "01.02.2023", "15.02.2023", "01.03.2023"};
     data[10].client.payingHistory = {};
     data[10].client.diseaseName = {};
     data[10].client.diseaseDate = {};
