@@ -1,4 +1,5 @@
 #include "loginsystem.h"
+#include "prices.h"
 
 //first function of manager menu
 void showClientList(vector<Account>& data, int userEnter, int peopleCount) {
@@ -73,9 +74,50 @@ void findClient(vector<Account>& data, string strUserEnter, int peopleCount) {
     }
 }
 
-//4
-void changePrice(){
-
+void findDisease(vector <string> &diseasesNames, vector <int> &prices, string &strUserEnter, int peopleCount) { 
+    int tempId; 
+    int tempInput; 
+    bool successFind = false; 
+    for (int i = 0; i < peopleCount; i++) { 
+        if (strUserEnter == diseasesNames[i])  { 
+            tempId = i; 
+            successFind = true; 
+            system("cls"); 
+            break; 
+        } 
+    } 
+    if (successFind == true) { 
+        cout << "Нынешняя цена процедуры " << diseasesNames[tempId] << " - " << prices[tempId] << "$" << endl << "Введите новую цену: " << endl 
+        << "Если же вы хотите вернуться в главное меню, введите 0: "<< endl << endl << ">> "; 
+        cin >> tempInput; 
+        if (tempInput <= 0) { 
+            strUserEnter = "0";  
+            system("cls"); 
+        } 
+        else { 
+            prices[tempId] = tempInput; 
+            system("cls");
+            cout << "Новая цена в виде " << tempInput << "$ для процедуры " << diseasesNames[tempId] << " была успешно установлена." << endl 
+            << "Если вы хотите изменить цену для другой процедуры, введите ее название: " << endl << "Или напишите 0 чтобы вернуться в главное меню: " << endl
+            << endl;
+            cin >> strUserEnter;
+        } 
+    } 
+    else { 
+        cout << "Данная процедура не найдена, попробуйте еще раз: " << endl << ">> "; 
+        cin >> strUserEnter;
+        system("cls");
+    } 
+} 
+ 
+//4 
+void changePrice(vector <string> &diseasesNames, vector <int> &prices, string &strUserEnter, int peopleCount){ 
+    cout << "Введите название процедуры, которой хотите изменить цену: " << endl << "Если же вы хотите вернуться в главное меню, введите 0: " << endl << ">> "; 
+    cin >> strUserEnter; 
+    system("cls"); 
+    while (strUserEnter!="0") { 
+        findDisease(diseasesNames, prices, strUserEnter, peopleCount); 
+    } 
 }
 
 //5
@@ -84,10 +126,10 @@ void changeTimeOrProcedure(){
 }
 
 //sixth function of manager menu
-void showMaxPersonVisits(vector<Account>& data, int &userEnter, int peopleCount){
-    int maxVisits = data[6].client.visitHistory.size();
+void showMaxPersonVisits(vector<Account>& data, int &userEnter, int peopleCount, int personalCount){
+    int maxVisits = data[personalCount].client.visitHistory.size();
     int tempInt;
-    for (int i = 7; i < peopleCount; i++) {
+    for (int i = 0; i < peopleCount; i++) {
         if (data[i].type == "patient" && maxVisits < data[i].client.visitHistory.size()) {
             maxVisits = data[i].client.visitHistory.size();
             tempInt = i;
@@ -105,8 +147,8 @@ void showMaxPersonVisits(vector<Account>& data, int &userEnter, int peopleCount)
 }
 
 //seventh function of manager menu
-void showMinPersonVisits(vector<Account>& data, int &userEnter, int peopleCount){
-    int minVisits = data[6].client.visitHistory.size();
+void showMinPersonVisits(vector<Account>& data, int &userEnter, int peopleCount, int personalCount){
+    int minVisits = data[personalCount].client.visitHistory.size();
     int tempInt;
     for (int i = 7; i < peopleCount; i++) {
         if (data[i].type == "patient" && minVisits > data[i].client.visitHistory.size()) {
@@ -126,7 +168,7 @@ void showMinPersonVisits(vector<Account>& data, int &userEnter, int peopleCount)
 }
 
 //main manager menu
-void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int peopleCount, int beingTreatedCount, string strUserEnter) {
+void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int peopleCount, int beingTreatedCount, string strUserEnter, vector <string> &diseasesNames, vector <int> &prices, int personalCount) {
     while(programStatus) {
         
         userEnter = 0;
@@ -173,16 +215,22 @@ void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int p
                 findClient(data, strUserEnter, peopleCount); //for now does not work with russian names
                 break;
             }
+            case 4:  
+            { 
+                system("cls"); 
+                changePrice(diseasesNames, prices, strUserEnter, peopleCount); 
+                break;
+            }
             case 6:
             {
                 system("cls");
-                showMaxPersonVisits(data, userEnter, peopleCount);
+                showMaxPersonVisits(data, userEnter, peopleCount, personalCount);
                 break;
             }
             case 7:
             {
                 system("cls");
-                showMinPersonVisits(data, userEnter, peopleCount);
+                showMinPersonVisits(data, userEnter, peopleCount, personalCount);
                 break;                
             }
             case 8:

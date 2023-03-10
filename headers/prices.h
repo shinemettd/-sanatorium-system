@@ -1,7 +1,8 @@
+#pragma once
 #include "libraries.h"
 
 vector <string> diseasesNames = {
-                                "Кардиопатия", //0
+                                "Cardio", //0
                                 "Ревматизм в неактивной фазе", //1
                                 "Бронхиальная астма", //2
                                 "Эндометрит", //3 //only women

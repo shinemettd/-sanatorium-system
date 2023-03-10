@@ -1,6 +1,5 @@
 #pragma once
 #include "struct.h"
-#include "prices.h"
 
 //today is 17.03.2023
 

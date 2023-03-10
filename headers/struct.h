@@ -23,8 +23,3 @@ struct Account {
     } client;
 };
 
-struct Prices {
-    string diseases;
-    int diseasesPrice;
-};
-

@@ -41,7 +41,6 @@ int main()
     string enterType, enterLogin, enterPassword;
     int actualId;
     int userEnter;
-    int clientCount = 5; //just for primary code testing.
     int beingTreatedCount = 0;
     int wasTreatedCount = 0;
     int personalCount;
@@ -94,10 +93,10 @@ int main()
         cout << "Ваш доступ: " << access << endl;
 
         switch(access) {
-            case '2': 
-            {
-                managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter);
-                break;
+            case '2':  
+            { 
+                managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, diseasesNames, prices, personalCount); 
+                break; 
             }
             default:
             {
