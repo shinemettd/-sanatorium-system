@@ -74,6 +74,7 @@ void findClient(vector<Account>& data, string strUserEnter, int peopleCount) {
     }
 }
 
+//function for fourth function, that allow run recursion
 void findDisease(vector <string> &diseasesNames, vector <int> &prices, string &strUserEnter, int peopleCount) { 
     int tempId; 
     int tempInput; 
@@ -97,10 +98,11 @@ void findDisease(vector <string> &diseasesNames, vector <int> &prices, string &s
         else { 
             prices[tempId] = tempInput; 
             system("cls");
-            cout << "Новая цена в виде " << tempInput << "$ для процедуры " << diseasesNames[tempId] << " была успешно установлена." << endl 
+            cout << "Новая цена процедуры " << diseasesNames[tempId] << ": " << tempInput << "$" << endl 
             << "Если вы хотите изменить цену для другой процедуры, введите ее название: " << endl << "Или напишите 0 чтобы вернуться в главное меню: " << endl
-            << endl;
+            << endl << ">> ";
             cin >> strUserEnter;
+            system("cls");
         } 
     } 
     else { 
@@ -110,7 +112,7 @@ void findDisease(vector <string> &diseasesNames, vector <int> &prices, string &s
     } 
 } 
  
-//4 
+//fourth function of manager menu
 void changePrice(vector <string> &diseasesNames, vector <int> &prices, string &strUserEnter, int peopleCount){ 
     cout << "Введите название процедуры, которой хотите изменить цену: " << endl << "Если же вы хотите вернуться в главное меню, введите 0: " << endl << ">> "; 
     cin >> strUserEnter; 
