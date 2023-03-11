@@ -1,6 +1,5 @@
 #pragma once
 #include "struct.h"
-#include "prices.h"
 
 //today is 17.03.2023
 
@@ -145,4 +144,35 @@ void dataBase (vector<Account>& data) {
     data[10].client.payingHistory = {};
     data[10].client.diseaseName = {};
     data[10].client.diseaseDate = {};
+}
+
+void fillDiseases(vector<Diseases>& diseases) {
+    
+    diseases[0].diseasesName = "Cardio";
+    diseases[0].diseasesPrice = 35;
+
+    diseases[1].diseasesName = "Ревматизм в неактивной фазе";
+    diseases[1].diseasesPrice = 40;
+
+    diseases[2].diseasesName = "Бронхиальная астма";
+    diseases[2].diseasesPrice = 25;
+
+    diseases[3].diseasesName = "Эндометрит";
+    diseases[3].diseasesPrice = 40;
+
+    diseases[4].diseasesName = "Хронический сальпингит";
+    diseases[4].diseasesPrice = 30;
+
+    diseases[5].diseasesName = "Ринит";
+    diseases[5].diseasesPrice = 25;
+
+    diseases[6].diseasesName = "Ларингит";
+    diseases[6].diseasesPrice = 35;
+
+    diseases[7].diseasesName = "Хронический простатит";
+    diseases[7].diseasesPrice = 45;
+
+    diseases[8].diseasesName = "Импотенция";
+    diseases[8].diseasesPrice = 30;
+
 }

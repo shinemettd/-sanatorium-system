@@ -31,8 +31,11 @@ void showPersonal (int peopleCount, vector<Account>& data) {
 int main()
 {
     int peopleCount = 11; //just for primary code testing.
+    int diseasesCount = 9; //just for primary code testing.
     vector <Account> data(peopleCount); 
+    vector <Diseases> diseases(diseasesCount);
     dataBase(data); //filling database
+    fillDiseases(diseases); //filling diseases database
     //showPersonal(peopleCount, data);
     bool typeStatus = false;
     bool loginStatus = false;
@@ -43,7 +46,7 @@ int main()
     int userEnter;
     int beingTreatedCount = 0;
     int wasTreatedCount = 0;
-    int personalCount;
+    int personalCount = 0;
     string strUserEnter;
     bool systemOn = true;
     
@@ -95,7 +98,7 @@ int main()
         switch(access) {
             case '2':  
             { 
-                managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, diseasesNames, prices, personalCount); 
+                managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, personalCount, diseases); 
                 break; 
             }
             default:
