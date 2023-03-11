@@ -76,7 +76,7 @@ void findClient(vector<Account>& data, string strUserEnter, int peopleCount) {
 //fourth function of manager menu
 void showAllDiseases (vector <Diseases> &diseases, string &strUserEnter) {
     for (int i = 0; i < diseases.size(); i++) {
-        cout << "Название:" << diseases[i].diseasesName << endl << "Цена: " << diseases[i].diseasesPrice << "$" << endl << endl;
+        cout << diseases[i].diseasesName << endl << "Цена: " << diseases[i].diseasesPrice << "$" << endl << "Время назначения: " << diseases[i].diseasesTime << endl << endl;
     }
     cout << endl << "Чтобы вернуться в главное меню введите 0:" << endl << endl << ">> ";
     while (strUserEnter != "0") {
@@ -135,11 +135,60 @@ void changePrice(vector <Diseases> &diseases, string &strUserEnter, int peopleCo
         findDisease(diseases, strUserEnter, peopleCount); 
     } 
 }
-
-void changeTime (vector<Account>& data, string &strUserEnter, int userEnter, int peopleCount) {
-
+//function for sixth function of manager menu 1
+void changeProcedureTime (vector <Diseases> &diseases, string &strUserEnter, int userEnter, int peopleCount) {
+    int tempId; 
+    bool successFind = false;
+    system("cls");
+    for (int i = 0; i < peopleCount; i++) {
+        if (strUserEnter ==  diseases[i].diseasesName) {
+            successFind = true;
+            tempId = i;
+            break;
+        }
+    }
+    if (successFind == true) {
+        cout << "Введите новое время в формате ЧЧ:ММ для процедуры " << diseases[tempId].diseasesName << ": " << endl << "Если вы передумали, напишите 0:" << endl << endl << ">> ";
+        cin >> strUserEnter;
+        if (strUserEnter != "0") {
+            diseases[tempId].diseasesTime = strUserEnter;
+            system("cls");
+            cout << "Новое время для процедуры было успешно установлено!" << endl << "Введите 0, если хотите вернуться в главное меню" << endl 
+            << "Введите 1, если вы хотите сменить время другой процедуре: " << endl << endl << ">> ";
+            while (userEnter != 0 || userEnter != 1) {
+                cin >> userEnter;
+                if (userEnter == 0) {
+                    strUserEnter = "0";
+                    break;
+                }
+                else if (userEnter == 1) {
+                    strUserEnter = "null";
+                    return ;
+                }
+                else {
+                    cout << "Неверно введено число! Попробуйте еще раз: " << endl << endl << ">> ";
+                }
+            }
+        }
+        else {
+            strUserEnter = "0";
+            system("cls");
+        }
+    }
+    else {
+        if (strUserEnter == "null") {
+            cin >> strUserEnter;
+            system("cls");
+        }
+        else {
+            cout << "Данная процедура не была найдена! Попробуйте еще раз: " << endl << "Или введите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+            cin >> strUserEnter;
+            system("cls");
+        }
+    }
 }
 
+//function for sixth function of manager menu 2
 void changeProcedureName(vector <Diseases> &diseases, string &strUserEnter, int userEnter, int peopleCount) {
     int tempId; 
     bool successFind = false;
@@ -192,8 +241,8 @@ void changeProcedureName(vector <Diseases> &diseases, string &strUserEnter, int 
     }
 }
 
-//sixth function of manager menu
-void changeTimeOrProcedureName(vector<Account>& data, vector <Diseases> &diseases, string &strUserEnter, int userEnter, int peopleCount){
+//main sixth function of manager menu
+void changeTimeOrProcedureName(vector <Diseases> &diseases, string &strUserEnter, int userEnter, int peopleCount){
     while (strUserEnter != "0") {  
         cin >> userEnter;
         if (userEnter == 0) {
@@ -202,6 +251,12 @@ void changeTimeOrProcedureName(vector<Account>& data, vector <Diseases> &disease
         }
         else if (userEnter == 1) {
             system("cls");
+            cout << "Введите название процедуры: " << endl << endl << ">> ";
+            cin >> strUserEnter;
+            system("cls");
+            while (strUserEnter != "0") {
+                changeProcedureTime(diseases, strUserEnter, userEnter, peopleCount);
+            }
         }
         else if (userEnter == 2) {
             system("cls");
@@ -272,7 +327,7 @@ void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int p
         << "1. Показать список посетителей" << endl //(Показывает список посетителей, которые получают на данный момент свое лечение)
         << "2. Показать количество посетителей" << endl 
         << "3. Поиск посетителя" << endl 
-        << "4. Показать все процедуры" << endl
+        << "4. Показать список процедур" << endl
         << "5. Изменить цену для процедур" << endl 
         << "6. Изменить время/название процедур" << endl 
         << "7. Показать посетителя с максимальным количеством посещений" << endl
@@ -328,7 +383,7 @@ void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int p
                 system("cls"); 
                 cout << "Введите 1, чтобы изменить время процедуры:" << endl << "Введите 2, чтобы изменить название процедуры: " << endl 
                 << "Введите 0, чтобы вернуться в главное меню: " << endl << endl << ">> ";
-                changeTimeOrProcedureName(data, diseases, strUserEnter, userEnter, peopleCount); 
+                changeTimeOrProcedureName(diseases, strUserEnter, userEnter, peopleCount); 
                 break;
             }
             case 7:

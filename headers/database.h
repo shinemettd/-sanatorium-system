@@ -150,29 +150,38 @@ void fillDiseases(vector<Diseases>& diseases) {
     
     diseases[0].diseasesName = "Cardio";
     diseases[0].diseasesPrice = 35;
+    diseases[0].diseasesTime = "11:00";
 
     diseases[1].diseasesName = "Ревматизм в неактивной фазе";
     diseases[1].diseasesPrice = 40;
+    diseases[1].diseasesTime = "13:00";
 
     diseases[2].diseasesName = "Бронхиальная астма";
     diseases[2].diseasesPrice = 25;
+    diseases[2].diseasesTime = "10:30";
 
     diseases[3].diseasesName = "Эндометрит";
     diseases[3].diseasesPrice = 40;
+    diseases[3].diseasesTime = "15:00";
 
     diseases[4].diseasesName = "Хронический сальпингит";
     diseases[4].diseasesPrice = 30;
+    diseases[4].diseasesTime = "14:30";
 
     diseases[5].diseasesName = "Ринит";
     diseases[5].diseasesPrice = 25;
+    diseases[5].diseasesTime = "11:30";
 
     diseases[6].diseasesName = "Ларингит";
     diseases[6].diseasesPrice = 35;
+    diseases[0].diseasesTime = "16:00";
 
     diseases[7].diseasesName = "Хронический простатит";
     diseases[7].diseasesPrice = 45;
+    diseases[0].diseasesTime = "12:30";
 
     diseases[8].diseasesName = "Импотенция";
     diseases[8].diseasesPrice = 30;
+    diseases[0].diseasesTime = "12:00";
 
 }

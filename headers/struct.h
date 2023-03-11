@@ -26,5 +26,6 @@ struct Account {
 struct Diseases {
     string diseasesName;
     int diseasesPrice;
+    string diseasesTime;
 };
 
