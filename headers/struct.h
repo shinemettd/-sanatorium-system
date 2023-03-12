@@ -27,5 +27,5 @@ struct Diseases {
     string diseasesName;
     int diseasesPrice;
     string diseasesTime;
+    string bloodType;
 };
-

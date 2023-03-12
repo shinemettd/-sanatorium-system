@@ -3,7 +3,47 @@
 
 //today is 17.03.2023
 
-void dataBase (vector<Account>& data) {
+void fillDiseases(vector<Diseases>& diseases) {
+    
+    diseases[0].diseasesName = "Cardio";
+    diseases[0].diseasesPrice = 35;
+    diseases[0].diseasesTime = "11:00";
+
+    diseases[1].diseasesName = "Ревматизм в неактивной фазе";
+    diseases[1].diseasesPrice = 40;
+    diseases[1].diseasesTime = "13:00";
+
+    diseases[2].diseasesName = "Бронхиальная астма";
+    diseases[2].diseasesPrice = 25;
+    diseases[2].diseasesTime = "10:30";
+
+    diseases[3].diseasesName = "Эндометрит";
+    diseases[3].diseasesPrice = 40;
+    diseases[3].diseasesTime = "15:00";
+
+    diseases[4].diseasesName = "Хронический сальпингит";
+    diseases[4].diseasesPrice = 30;
+    diseases[4].diseasesTime = "14:30";
+
+    diseases[5].diseasesName = "Ринит";
+    diseases[5].diseasesPrice = 25;
+    diseases[5].diseasesTime = "11:30";
+
+    diseases[6].diseasesName = "Ларингит";
+    diseases[6].diseasesPrice = 35;
+    diseases[0].diseasesTime = "16:00";
+
+    diseases[7].diseasesName = "Хронический простатит";
+    diseases[7].diseasesPrice = 45;
+    diseases[0].diseasesTime = "12:30";
+
+    diseases[8].diseasesName = "Импотенция";
+    diseases[8].diseasesPrice = 30;
+    diseases[0].diseasesTime = "12:00";
+
+}
+
+void dataBase (vector<Account>& data, vector<Diseases>& diseases) {
     
     data[0].type = "director";
     data[0].login = "eleonora71";
@@ -77,9 +117,10 @@ void dataBase (vector<Account>& data) {
     data[6].client.stayDay = 23;
     data[6].client.beingTreated = false;
     data[6].client.visitHistory = {"21.01.2023", "27.01.2023", "04.02.2023"};
-    data[6].client.payingHistory = {};
-    data[6].client.diseaseName = {};
-    data[6].client.diseaseDate = {};
+    data[6].client.payingHistory = {diseases[4].diseasesPrice, diseases[4].diseasesPrice, diseases[4].diseasesPrice};
+    data[6].client.diseaseName = {diseases[4].diseasesName};
+    data[6].client.diseaseDate = {"27.01.2023", "04.02.2023"};
+    data[6].client.bloodType = "4+";
 
     data[7].type = "patient";
     data[7].login = "katerina_s";
@@ -93,9 +134,10 @@ void dataBase (vector<Account>& data) {
     data[7].client.stayDay = 6;
     data[7].client.beingTreated = true;
     data[7].client.visitHistory = {"02.03.2023", "12.03.2023"};
-    data[7].client.payingHistory = {};
-    data[7].client.diseaseName = {};
-    data[7].client.diseaseDate = {};
+    data[7].client.payingHistory = {diseases[3].diseasesPrice, diseases[3].diseasesPrice};
+    data[7].client.diseaseName = {diseases[3].diseasesName};
+    data[7].client.diseaseDate = {"12.03.2023", "19.03.2023", "26.03.2023"};
+    data[7].client.bloodType = "3-";
 
     data[8].type = "patient";
     data[8].login = "sneax98";
@@ -109,9 +151,10 @@ void dataBase (vector<Account>& data) {
     data[8].client.stayDay = 17;
     data[8].client.beingTreated = true;
     data[8].client.visitHistory = {"01.03.2023", "04.03.2023", "11.03.2023"};
-    data[8].client.payingHistory = {25, 25, 25};
-    data[8].client.diseaseName = {"Бронхиальная астма"};
+    data[8].client.payingHistory = {diseases[1].diseasesPrice, diseases[1].diseasesPrice, diseases[1].diseasesPrice};
+    data[8].client.diseaseName = {diseases[1].diseasesName};
     data[8].client.diseaseDate = {"04.03.2023", "11.03.2023", "18.03.2023", "25.03.2023"};  
+    data[8].client.bloodType = "1+";
 
     data[9].type = "patient";
     data[9].login = "homelander";
@@ -125,9 +168,13 @@ void dataBase (vector<Account>& data) {
     data[9].client.stayDay = 1;
     data[9].client.beingTreated = false;
     data[9].client.visitHistory = {"14.07.2021", "15.07.2021", "17.07.2021", "19.07.2021", "26.07.2021", "02.08.2021", "01.09.2021"};
-    data[9].client.payingHistory = {30 + 35, 30 + 35, 30 + 35, 30 + 35, 30 + 35, 30 + 35, 30 + 35};
-    data[9].client.diseaseName = {"Импотенция", "Кардиопатия"};
+    data[9].client.payingHistory = {diseases[8].diseasesPrice + diseases[0].diseasesPrice, diseases[8].diseasesPrice + diseases[0].diseasesPrice, 
+                                    diseases[8].diseasesPrice + diseases[0].diseasesPrice, diseases[8].diseasesPrice + diseases[0].diseasesPrice, 
+                                    diseases[8].diseasesPrice + diseases[0].diseasesPrice, diseases[8].diseasesPrice + diseases[0].diseasesPrice, 
+                                    diseases[8].diseasesPrice + diseases[0].diseasesPrice};
+    data[9].client.diseaseName = {diseases[8].diseasesName, diseases[0].diseasesName};
     data[9].client.diseaseDate = {"15.07.2021", "17.07.2021", "19.07.2021", "26.07.2021", "02.08.2021", "01.09.2021"};
+    data[9].client.bloodType = "2+";
 
     data[10].type = "patient";
     data[10].login = "natsuki1998";
@@ -140,48 +187,10 @@ void dataBase (vector<Account>& data) {
     data[10].ID = 10;
     data[10].client.stayDay = 25;
     data[10].client.beingTreated = true;
-    data[10].client.visitHistory = {"01.01.2023", "15.01.2023", "01.02.2023", "15.02.2023", "01.03.2023"};
-    data[10].client.payingHistory = {};
-    data[10].client.diseaseName = {};
-    data[10].client.diseaseDate = {};
-}
-
-void fillDiseases(vector<Diseases>& diseases) {
-    
-    diseases[0].diseasesName = "Cardio";
-    diseases[0].diseasesPrice = 35;
-    diseases[0].diseasesTime = "11:00";
-
-    diseases[1].diseasesName = "Ревматизм в неактивной фазе";
-    diseases[1].diseasesPrice = 40;
-    diseases[1].diseasesTime = "13:00";
-
-    diseases[2].diseasesName = "Бронхиальная астма";
-    diseases[2].diseasesPrice = 25;
-    diseases[2].diseasesTime = "10:30";
-
-    diseases[3].diseasesName = "Эндометрит";
-    diseases[3].diseasesPrice = 40;
-    diseases[3].diseasesTime = "15:00";
-
-    diseases[4].diseasesName = "Хронический сальпингит";
-    diseases[4].diseasesPrice = 30;
-    diseases[4].diseasesTime = "14:30";
-
-    diseases[5].diseasesName = "Ринит";
-    diseases[5].diseasesPrice = 25;
-    diseases[5].diseasesTime = "11:30";
-
-    diseases[6].diseasesName = "Ларингит";
-    diseases[6].diseasesPrice = 35;
-    diseases[0].diseasesTime = "16:00";
-
-    diseases[7].diseasesName = "Хронический простатит";
-    diseases[7].diseasesPrice = 45;
-    diseases[0].diseasesTime = "12:30";
-
-    diseases[8].diseasesName = "Импотенция";
-    diseases[8].diseasesPrice = 30;
-    diseases[0].diseasesTime = "12:00";
-
+    data[10].client.visitHistory = {"01.01.2023", "15.01.2023", "01.02.2023", "15.02.2023", "01.03.2023", "15.03.2023"};
+    data[10].client.payingHistory = {diseases[7].diseasesPrice, diseases[7].diseasesPrice, diseases[7].diseasesPrice,
+                                     diseases[7].diseasesPrice, diseases[7].diseasesPrice, diseases[7].diseasesPrice};
+    data[10].client.diseaseName = {diseases[7].diseasesName};
+    data[10].client.diseaseDate = {"15.01.2023", "01.02.2023", "15.02.2023", "01.03.2023", "15.03.2023", "01.04.2023"};
+    data[10].client.bloodType = "2+";
 }

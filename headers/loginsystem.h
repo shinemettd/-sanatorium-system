@@ -1,3 +1,4 @@
+#pragma once
 #include "database.h"
 
 //giving valid types of account
@@ -37,4 +38,14 @@ bool isLoginCorrect (string enterType, string enterLogin, string enterPassword, 
         }
     }
     return false;
+}
+
+void goBack(string &strUserEnter) {
+    cout << endl << "Чтобы вернуться назад, напишите 0: " << endl << endl << ">> ";
+    cin >> strUserEnter;
+    while (strUserEnter != "0") {
+        system("cls");
+        cout << "Чтобы вернуться назад, напишите 0: " << endl << endl << ">> ";
+        cin >> strUserEnter;
+    }
 }
