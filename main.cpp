@@ -1,5 +1,6 @@
 #include "headers\manager.h"
 #include "headers\patient.h"
+#include "headers\personal.h"
 
 void countTreatedPeople(vector<Account>& data, int peopleCount, int &beingTreatedCount, int &wasTreatedCount) {
     for (int i = 0; i < peopleCount; i++) {
@@ -32,13 +33,13 @@ void showPersonal (int peopleCount, vector<Account>& data) {
 int main()
 {
     vector <int> todaysDate = {17, 3, 23};
-    int peopleCount = 11; //just for primary code testing.
+    int peopleCount = 12; //just for primary code testing.
     int diseasesCount = 9; //just for primary code testing.
     vector <Account> data(peopleCount); 
     vector <Diseases> diseases(diseasesCount);
     fillDiseases(diseases); //filling diseases database
     dataBase(data, diseases); //filling personal database
-    showPersonal(peopleCount, data);
+    //showPersonal(peopleCount, data);
     bool typeStatus = false;
     bool loginStatus = false;
     bool programStatus = true;
@@ -98,9 +99,19 @@ int main()
         cout << "Ваш доступ: " << access << endl;
 
         switch(access) {
+            case '1':  
+            { 
+                //directorMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, personalCount, diseases); 
+                break; 
+            }            
             case '2':  
             { 
                 managerMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, personalCount, diseases); 
+                break; 
+            }
+            case '3':  
+            { 
+                personalMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, personalCount, diseases, actualId, todaysDate); 
                 break; 
             }
             case '4':  

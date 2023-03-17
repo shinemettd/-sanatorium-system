@@ -82,14 +82,14 @@ void showSanatoryDay (vector<Account>& data, int actualId, string strUserEnter) 
         if (data[actualId].client.stayDay % 10 == 2 || data[actualId].client.stayDay % 10 == 3  
         || data[actualId].client.stayDay % 10 == 4 && data[actualId].client.stayDay / 10 != 1) 
         {
-            cout << "Вы пробыли у нас " << data[actualId].client.stayDay << "дня, однако на данный момент вы уже окончили лечение!" << endl;
+            cout << "Вы пробыли у нас " << data[actualId].client.stayDay << " дня, однако на данный момент вы уже окончили лечение!" << endl;
         }
         else if (data[actualId].client.stayDay % 10 == 1) {
-            cout << "Вы пробыли у нас " << data[actualId].client.stayDay << "день, однако на данный момент вы уже окончили лечение!" << endl;
+            cout << "Вы пробыли у нас " << data[actualId].client.stayDay << " день, однако на данный момент вы уже окончили лечение!" << endl;
         }
         else 
         {
-            cout << "Вы пробыли у нас " << data[actualId].client.stayDay << "дней, однако на данный момент вы уже окончили лечение!" << endl;
+            cout << "Вы пробыли у нас " << data[actualId].client.stayDay << " дней, однако на данный момент вы уже окончили лечение!" << endl;
         }
         goBack(strUserEnter);
     }

@@ -1,6 +1,5 @@
+#pragma once
 #include "loginsystem.h"
-
-
 
 //first function of manager menu
 void showClientList(vector<Account>& data, string strUserEnter, int peopleCount) {
@@ -10,7 +9,7 @@ void showClientList(vector<Account>& data, string strUserEnter, int peopleCount)
                 << data[i].surname << endl
                 << "Рост: " << data[i].height << " см " << endl
                 << "Вес: " << data[i].weight << " кг " << endl
-                << "Дата рождения: "<< data[i].birthday << endl;
+                << "Дата рождения: "<< data[i].birthday << endl << endl;
         }
     }
     goBack(strUserEnter);
@@ -22,27 +21,77 @@ void showClientCount(vector<Account>& data, string strUserEnter, int peopleCount
     goBack(strUserEnter);
 }
 
+void findWithSurname(vector<Account>& data, string &strUserEnter, int peopleCount) {
+    string tempUserEnter;
+    int successSurnameFind = 0;
+        cin >> tempUserEnter;
+        if (tempUserEnter == "0") {
+            strUserEnter = "0";
+            return ;
+        }
+        for (int i = 0; i < peopleCount; i++) {
+            if (strUserEnter == data[i].name && tempUserEnter == data[i].surname) {
+                successSurnameFind++;
+                system("cls");
+                cout << data[i].name << " " << data[i].surname << endl
+                << "Рост: " << data[i].height << " см " << endl
+                << "Вес: " << data[i].weight << " кг " << endl
+                << "Дата рождения: "<< data[i].birthday << endl << endl
+                << "Список болезней: " << endl;
+            for (int j = 0; j < data[i].client.diseaseName.size(); j++) {
+                cout << data[i].client.diseaseName[j] << endl;
+            }
+            break;
+            }
+        }
+        if (successSurnameFind == 0) {
+            system("cls");
+            cout << "Неправильно введена фамилия!" << endl << "Попробуйте ввести фамилию еще раз: " << endl;
+        }
+        else {
+            goBack(strUserEnter);
+            return ;
+        }
+}
+
 //function for third function, that allow run recursion
 void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount) {
     int successFind = 0;
     for (int i = 0; i < peopleCount; i++) {
         if (data[i].name == strUserEnter) {
             successFind++;
-            cout << endl << data[i].name << " " << data[i].surname << endl
-            << "Рост: " << data[i].height << " см " << endl
-            << "Вес: " << data[i].weight << " кг " << endl
-            << "Дата рождения: "<< data[i].birthday << endl << endl
-            << "Список болезней: " << endl;
-            for (int j = 0; j < data[i].client.diseaseName.size(); j++) {
-                cout << data[i].client.diseaseName[j] << endl;
             }
-        }
     }
     if (successFind == 0) {
         cout << "Данный пользователь не найден! Попробуйте еще раз, или напишите 0, чтобы выйти в меню: " << endl << endl << ">> ";
     }
-    else {
-        cout << endl << "Чтобы узнать информацию о другом пользователе, напишите его имя. " << endl << "Если же вы хотите вернуться в главное меню, введите 0: " << endl << endl << ">> ";
+    else if (successFind == 1) {
+        for (int i = 0; i < peopleCount; i++) {
+            if (data[i].name == strUserEnter) {
+                cout << data[i].name << " " << data[i].surname << endl
+                << "Рост: " << data[i].height << " см " << endl
+                << "Вес: " << data[i].weight << " кг " << endl
+                << "Дата рождения: "<< data[i].birthday << endl << endl
+                << "Список болезней: " << endl;
+                for (int j = 0; j < data[i].client.diseaseName.size(); j++) {
+                    cout << data[i].client.diseaseName[j] << endl;
+                }
+            }
+        }
+        cout << endl << "Чтобы узнать информацию о другом пользователе, напишите его имя. " << endl 
+        << "Если же вы хотите вернуться в главное меню, введите 0: " << endl << endl << ">> ";
+    }
+    else  {
+        cout << "По запросу имени " << strUserEnter << " было найдено " << successFind << " пользователя: " << endl;
+        for (int i = 0; i < peopleCount; i++) {
+            if (strUserEnter == data[i].name) {
+                cout << data[i].name << " " << data[i].surname << endl;
+            }
+        } 
+        cout << endl << "Введите фамилию нужного вам пользователя: " << endl << endl;
+        while (strUserEnter != "0") { 
+            findWithSurname(data, strUserEnter, peopleCount);
+        }
     }
     cin >> strUserEnter;
     system("cls");
@@ -63,7 +112,7 @@ void findClient(vector<Account>& data, string strUserEnter, int peopleCount) {
 //fourth function of manager menu
 void showAllDiseases (vector <Diseases> &diseases, string &strUserEnter) {
     for (int i = 0; i < diseases.size(); i++) {
-        cout << diseases[i].diseasesName << endl << "Цена: " << diseases[i].diseasesPrice << "$" << endl << "Время назначения: " << diseases[i].diseasesTime << endl ;
+        cout << diseases[i].diseasesName << endl << "Цена: " << diseases[i].diseasesPrice << "$" << endl << "Время назначения: " << diseases[i].diseasesTime << endl << endl;
     }
     goBack(strUserEnter);
 }
@@ -73,7 +122,7 @@ void findDisease(vector <Diseases> &diseases, string &strUserEnter, int peopleCo
     int tempId; 
     int tempInput; 
     bool successFind = false; 
-    for (int i = 0; i < peopleCount; i++) { 
+    for (int i = 0; i < diseases.size(); i++) { 
         if (strUserEnter == diseases[i].diseasesName)  { 
             tempId = i; 
             successFind = true; 
@@ -186,7 +235,10 @@ void changeProcedureName(vector <Diseases> &diseases, string &strUserEnter, int 
             << "Введите 1, если вы хотите сменить название другой процедуры: " << endl << endl << ">> ";
             while (strUserEnter != "0" || strUserEnter != "1") {
                 cin >> strUserEnter;
-                if (strUserEnter == "1") {
+                if (strUserEnter == "0") {
+                    return ;
+                }
+                else if (strUserEnter == "1") {
                     strUserEnter = "null";
                     return ;
                 }
@@ -327,7 +379,7 @@ void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int p
             case 3:
             {
                 system("cls");
-                findClient(data, strUserEnter, peopleCount); //for now does not work with russian names
+                findClient(data, strUserEnter, peopleCount); 
                 break;
             }
             case 4:
