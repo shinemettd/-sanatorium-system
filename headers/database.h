@@ -175,7 +175,7 @@ void dataBase (vector<Account>& data, vector<Diseases>& diseases) {
     data[9].client.diseaseName = {diseases[8].diseasesName, diseases[0].diseasesName};
     data[9].client.diseaseDate = {"15.07.2021", "17.07.2021", "19.07.2021", "26.07.2021", "02.08.2021", "01.09.2021"};
     data[9].client.bloodType = "1+";
-
+    
     data[10].type = "patient";
     data[10].login = "natsuki1998";
     data[10].password = "emilia-tan-maji-tenshi";

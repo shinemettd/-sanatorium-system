@@ -33,16 +33,16 @@ void showPersonal (int peopleCount, vector<Account>& data) {
 int main()
 {
     vector <int> todaysDate = {17, 3, 23};
-    int peopleCount = 12; //just for primary code testing.
-    int diseasesCount = 9; //just for primary code testing.
+    int peopleCount = 12; //initial amount !!!IF YOU ADDING NEW PEOPLE TO DATABASE UPDATE THE VALUE OF IT!!!
+    int diseasesCount = 9; //initial amount !!!IF YOU ADDING NEW DISEASES TO DATABASE UPDATE THE VALUE OF IT!!!
     vector <Account> data(peopleCount); 
     vector <Diseases> diseases(diseasesCount);
     fillDiseases(diseases); //filling diseases database
     dataBase(data, diseases); //filling personal database
     //showPersonal(peopleCount, data);
-    bool typeStatus = false;
-    bool loginStatus = false;
-    bool programStatus = true;
+    bool typeStatus;
+    bool loginStatus;
+    bool programStatus;
     char access;
     string enterType, enterLogin, enterPassword;
     int actualId;
@@ -55,6 +55,12 @@ int main()
     
     while (systemOn == true) {  
         
+        system("cls");
+
+        bool typeStatus = false;
+        bool loginStatus = false;
+        int actualId = -1;
+
         countTreatedPeople(data, peopleCount, beingTreatedCount, wasTreatedCount);
         personalCount = peopleCount - wasTreatedCount;
         
@@ -96,8 +102,7 @@ int main()
         
         system("cls");
         cout << "Добро пожаловать в систему, " << data[actualId].surname << " " << data[actualId].name << "!" << endl;
-        cout << "Ваш доступ: " << access << endl;
-
+        programStatus = true;
         switch(access) {
             case '1':  
             { 
@@ -123,6 +128,10 @@ int main()
             {
                 cout << "Error";
             }
+        }
+        if (programStatus == false) {
+            bool typeStatus = false;
+            bool loginStatus = false;
         }
         system("pause");
     }

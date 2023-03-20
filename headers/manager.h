@@ -49,8 +49,14 @@ void findWithSurname(vector<Account>& data, string &strUserEnter, int peopleCoun
             cout << "Неправильно введена фамилия!" << endl << "Попробуйте ввести фамилию еще раз: " << endl;
         }
         else {
-            goBack(strUserEnter);
-            return ;
+            cout << endl << "Введите 0, чтобы вернуться назад: " << endl << endl << ">> ";
+            while (strUserEnter!="0") {
+                cin >> strUserEnter;
+                if (strUserEnter != "0") {
+                    strUserEnter = "0";
+                    return ;
+                }
+            }
         }
 }
 
@@ -60,7 +66,7 @@ void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount)
     for (int i = 0; i < peopleCount; i++) {
         if (data[i].name == strUserEnter) {
             successFind++;
-            }
+        }
     }
     if (successFind == 0) {
         cout << "Данный пользователь не найден! Попробуйте еще раз, или напишите 0, чтобы выйти в меню: " << endl << endl << ">> ";
@@ -92,6 +98,7 @@ void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount)
         while (strUserEnter != "0") { 
             findWithSurname(data, strUserEnter, peopleCount);
         }
+        return;
     }
     cin >> strUserEnter;
     system("cls");
@@ -188,6 +195,9 @@ void changeProcedureTime (vector <Diseases> &diseases, string &strUserEnter, int
                 cin >> strUserEnter;
                 if (strUserEnter == "1") {
                     strUserEnter = "null";
+                    return ;
+                }
+                else if (strUserEnter == "0") {
                     return ;
                 }
                 else {

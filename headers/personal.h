@@ -2,16 +2,112 @@
 #include "manager.h"
 
 //1
-
+void showListProcedure(vector<Account>& data, vector<Diseases>& diseases, string& strUserEnter, int peopleCount) {
+    bool extraSpace = false;
+    bool someonesFound = false;
+    for (int i = 0; i < diseases.size(); i++) {
+        cout << diseases[i].diseasesName << ":" << endl;
+        for (int j = 0; j < data.size(); j++) {
+            for (int l = 0; l < data[j].client.diseaseName.size(); l++) {
+                if (diseases[i].diseasesName == data[j].client.diseaseName[l]) {
+                    cout << data[j].name << " " << data[j].surname << endl;
+                    extraSpace = true;
+                }
+            }
+        }
+        if (extraSpace == true) {
+            cout << endl;
+            extraSpace = false;
+        }
+        else {
+            cout << "-" << endl << endl;
+        }
+    }
+    goBack(strUserEnter);
+}
 //2 already exist at manager.h
 
 //3 already exist at manager.h
 
 //4 
+void showSchedule(vector <Diseases> &diseases, string &strUserEnter) {
+    for (int i = 0; i < diseases.size(); i++) {
+        cout << diseases[i].diseasesName << " - " << diseases[i].diseasesTime << endl << endl;
+    }
+    goBack(strUserEnter);
+}
 
 //5
+void buyProcedure(vector<Account>& data, vector<Diseases>& diseases, string& strUserEnter) {
+    cout << "Введите имя человека, которому вы хотите назначить процедуру: " << endl << endl << ">> ";
+    cin >> strUserEnter;
+    bool successFindPatient = false;
+    bool successFindDisease = false;
+    bool patientHadDisease = false;
+    int nameId, diseaseId;
+    while (strUserEnter != "0") {
+        for (nameId = 0; data.size(); nameId++) {
+            if (data[nameId].name == strUserEnter && data[nameId].client.beingTreated == true) {
+                successFindPatient = true;
+                break;
+            }
+        }
+        if (successFindPatient == true) {
+            while (strUserEnter != "0") {
+                cout << endl << "Введите название процедуры, на которую вы хотите назначить пациента " << data[nameId].name << " " 
+                    << data[nameId].surname << ":" << endl << endl << ">> ";
+                cin >> strUserEnter;
+                for (diseaseId = 0; diseases.size(); diseaseId++) {
+                    if (diseases[diseaseId].diseasesName == strUserEnter) {
+                        for (int k = 0; k < diseases[diseaseId].diseasesName.size(); k++) {
+                            if (strUserEnter == data[nameId].client.diseaseName[k]) {
+                                cout << "Такая процедура уже имеется у пациента!" << endl << endl << "Введите 0, чтобы вернуться в главное меню: " 
+                                << endl << endl << ">> ";
+                                patientHadDisease = true;
+                                while (strUserEnter != "0") {
+                                    cin >> strUserEnter; 
+                                    if (strUserEnter != "0") {
+                                        strUserEnter = "0";
+                                    }
+                                }
+                            }
+                            else {
+                                patientHadDisease = false;
+                            }
+                        }
+                        if (patientHadDisease == false) {
+                            data[nameId].client.diseaseName.push_back(diseases[diseaseId].diseasesName);
+                        }
+                        successFindDisease = true;
+                        break;
+                    }
+                }
+                if (successFindDisease == true) {
+                    system("cls");
+                    cout << "Пациенту " << data[nameId].name << " " << data[nameId].surname << " была назначена процедура " << diseases[diseaseId].diseasesName <<
+                        endl << endl << "Введите 0, чтобы вернуться в главное меню:" << endl << endl << ">> ";
+                        while (strUserEnter != "0") {
+                            cin >>  strUserEnter;
+                            if (strUserEnter!="0") {
+                                strUserEnter = "0";
+                            }
+                        }
+                }
+                else {
+                    system("cls");
+                    cout << "Данная процедура не найдена! Попробуйте еще раз: " << endl << "Или напишите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+                }
+            }
+        }
+        else {
+            system("cls");
+            cout << "Данный пользователь не найден! Попробуйте еще раз: " << endl << "Или напишите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+        }
+    }
+}
 
-//for 6t 
+
+//for 6th function
 void findingProcedureFunction (vector<Account>& data, vector<Diseases>& diseases, string& strUserEnter, int peopleCount) {
     cin >> strUserEnter;   
     int successFind = 0;
@@ -85,7 +181,7 @@ void personalMenu(bool programStatus, vector<Account>& data, int userEnter, int 
             case 1: 
             {
                 system("cls");
-                
+                showListProcedure(data, diseases, strUserEnter, peopleCount);
                 break;
             }
             case 2:
@@ -103,13 +199,13 @@ void personalMenu(bool programStatus, vector<Account>& data, int userEnter, int 
             case 4:
             {
                 system("cls");
-                
+                showSchedule(diseases, strUserEnter);
                 break;
             }
             case 5:  
             { 
                 system("cls"); 
-                
+                buyProcedure(data, diseases, strUserEnter);
                 break;
             }
             case 6:  
