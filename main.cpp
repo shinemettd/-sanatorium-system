@@ -3,8 +3,10 @@
 #include "headers\PersonalFunctions.h"
 #include "headers\DirectorFunctions.h"
 
-void countTreatedPeople(vector<Account>& data, int peopleCount, int &beingTreatedCount, int &wasTreatedCount) {
-    for (int i = 0; i < peopleCount; i++) {
+void countTreatedPeople(vector<Account>& data, int &peopleCount, int &beingTreatedCount, int &wasTreatedCount) {
+    peopleCount = 0;
+    for (int i = 0; i < data.size(); i++) {
+    peopleCount++;   
         if (data[i].type == "patient"){
             wasTreatedCount++;
             if (data[i].client.beingTreated == true) {
@@ -66,7 +68,7 @@ int main()
         countTreatedPeople(data, peopleCount, beingTreatedCount, wasTreatedCount);
         personalCount = peopleCount - wasTreatedCount;
         
-        cout << "Введите пожалуйста тип аккаунта: "; enterLine();
+        cout << "Введите тип аккаунта: "; enterLine();
         while (typeStatus == false) {
             
             cin >> enterType;

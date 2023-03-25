@@ -48,7 +48,6 @@ bool isDateRight(string strUserEnter, string todaysDate) {
 
         double diff = difftime(timeUserEnter, timeDate);
         double years = diff / 31536000;
-        cout << years << "---";
         if (years >= 18) {
             return true;
         }
@@ -62,3 +61,4 @@ bool isDateRight(string strUserEnter, string todaysDate) {
     }
     return false;
 }
+

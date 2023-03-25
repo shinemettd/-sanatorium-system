@@ -65,6 +65,7 @@ void addPersonal (vector<Account>& data, string &strUserEnter, int userEnter, in
             
             do {
                 cin >> strUserEnter;
+                if (strUserEnter == "0") break;
                 system("cls");
             } while (isDateRight(strUserEnter, todaysDate)!= true);
             newAccount.birthday = strUserEnter;
@@ -104,7 +105,115 @@ void addPersonal (vector<Account>& data, string &strUserEnter, int userEnter, in
     }
 }
 
+void showAllAccounts(vector<Account>& data, string &strUserEnter, int peopleCount) {
+    system("cls");
+    for (int i = 0; i < peopleCount; i++) {
+        cout << data[i].name << " " << data[i].surname << endl
+        << "Тип аккаунта: " << data[i].type << endl
+        << "ID: " << data[i].ID << endl << endl;
+    }
+    while (strUserEnter!="0") {
+        cout << "Введите 0, чтобы вернуться в главное меню: "; enterLine();
+        cin >> strUserEnter;
+        if (strUserEnter != "0") {
+            strUserEnter = "0";
+        }
+    }
+}
 
+void editAccountInfo (vector<Account>& data, string &strUserEnter, int userEnter, int &peopleCount) {
+    system("cls");
+    cout << "Введите ID аккаунта:" << endl << "Для выхода в меню, напишите -1:"; enterLine();
+    int userId;
+    cin >> userEnter;
+    while (userEnter > 0) {
+        userId = userEnter;
+        if (userEnter > peopleCount) {
+            while (userEnter < peopleCount) {
+                system("cls");
+                cout << "Введено неверное ID, попробуйте еще раз: "; enterLine();
+                cin >> userEnter;
+                userId = userEnter;
+            }
+        }
+        else if (userEnter < 0) {
+            return;
+        }
+        else {
+            while (userEnter > 0 || userEnter <= 6) {
+                system("cls");
+                cout << "Поменять имя - 1" << endl << "Поменять фамилию - 2" << endl << "Поменять логин - 3" << endl 
+                << "Поменять пароль - 4" << endl << "Вернуться в главное меню - 5"; enterLine();
+                cin >> userEnter;
+                if (userEnter == 1) {
+                    system("cls");
+                    cout << "Введите новое имя: "; enterLine();
+                    cin >> strUserEnter;
+                    data[userId].name = strUserEnter;
+                    userEnter = 6;
+                }
+                else if (userEnter == 2) {
+                    system("cls");
+                    cout << "Введите новую фамилию: "; enterLine();
+                    cin >> strUserEnter;
+                    data[userId].surname = strUserEnter;
+                    userEnter = 6;
+                }
+                else if (userEnter == 3) {
+                    system("cls");
+                    cout << "Введите новый логин: "; enterLine();
+                    cin >> strUserEnter;
+                    data[userId].login = strUserEnter;
+                    userEnter = 6;
+                }
+                else if (userEnter == 4) {
+                    system("cls");
+                    cout << "Введите новый пароль: "; enterLine();
+                    cin >> strUserEnter;
+                    data[userId].password = strUserEnter;
+                    userEnter = 6;
+                }
+                else {
+                    userEnter = -1;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void deleteAccount(vector<Account>& data, string &strUserEnter, int userEnter, int &peopleCount) {
+    cout << "Введите ID аккаунта:" << endl << "Для выхода в меню, напишите -1:"; enterLine();
+    cin >> userEnter;
+    int userId;
+    while (userEnter > 0) {
+        userId = userEnter;
+        if (userEnter > peopleCount) {
+            while (userEnter < peopleCount) {
+                system("cls");
+                cout << "Введено неверное ID, попробуйте еще раз: "; enterLine();
+                cin >> userEnter;
+                userId = userEnter;
+            }
+        }
+        else if (userEnter < 0) {
+            return;
+        }
+        else {
+            system("cls");
+            cout << "Вы точно хотите удалить аккаунт " << data[userId].name << " " << data[userId].surname << "?" << endl << "Да - 1" << endl << "Нет - 2"; enterLine();
+            cin >> userEnter;
+            if (userEnter == 1) {
+                data.erase(data.begin() + userId);
+                peopleCount--;
+                break;
+            }
+            else {
+                break;
+            }
+        }
+    }
+}
 
 void directorMenu(bool programStatus, vector<Account>& data, int userEnter, int peopleCount, int beingTreatedCount, string strUserEnter, int personalCount, vector<Diseases> &diseases,
                   string todaysDate) {
@@ -144,19 +253,19 @@ void directorMenu(bool programStatus, vector<Account>& data, int userEnter, int 
             case 2:
             {
                 system("cls");
-                
+                showAllAccounts(data, strUserEnter, peopleCount);
                 break;
             }
             case 3:
             {
                 system("cls");
-                
+                editAccountInfo (data, strUserEnter, userEnter, peopleCount);
                 break;
             }
             case 4:
             {
                 system("cls");
-                
+                deleteAccount(data, strUserEnter, userEnter, peopleCount);
                 break;
             }
             case 5:  

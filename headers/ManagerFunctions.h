@@ -16,8 +16,14 @@ void showClientList(vector<Account>& data, string strUserEnter, int peopleCount)
 }
 
 //second function of manager menu
-void showClientCount(vector<Account>& data, string strUserEnter, int peopleCount, int beingTreatedCount) {
-    cout << "Всего на данный момент лечящихся: " << beingTreatedCount  << endl;
+void showClientCount(vector<Account>& data, string strUserEnter, int peopleCount, int &beingTreatedCount) {
+    beingTreatedCount = 0;
+    for (int i = 0; i < data.size(); i++) {
+        if (data[i].type == "patient" && data[i].client.beingTreated == true) {
+            beingTreatedCount++;
+        }
+    }
+    cout << "Всего на данный момент лечящихся: " << beingTreatedCount << endl;
     goBack(strUserEnter);
 }
 
