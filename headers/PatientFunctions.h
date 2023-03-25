@@ -1,4 +1,4 @@
-#include "loginsystem.h"
+#include "LoginSystem.h"
 
 //1
 void showProcedureHistory(vector<Account>& data, int actualId, string strUserEnter) {
@@ -97,7 +97,7 @@ void showSanatoryDay (vector<Account>& data, int actualId, string strUserEnter) 
 
 
 void patientMenu(bool programStatus, vector<Account>& data, int userEnter, int peopleCount, int beingTreatedCount, 
-                string strUserEnter, int personalCount, vector<Diseases> &diseases, int actualId, vector <int> todaysDate) {
+                string strUserEnter, int personalCount, vector<Diseases> &diseases, int actualId, string todaysDate) {
     
     while(programStatus) {
         system("cls");
@@ -112,7 +112,7 @@ void patientMenu(bool programStatus, vector<Account>& data, int userEnter, int p
         << "4. Показать расписание к процедурам" << endl
         << "5. Показать мою информацию " << endl 
         << "6. Показать мой день проживания в Санатории" << endl 
-        << "7. Выход" << endl << endl << ">> ";
+        << "7. Выход"; enterLine();
         
         cin >> userEnter; 
 

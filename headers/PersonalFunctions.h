@@ -1,5 +1,5 @@
-#include "loginsystem.h"
-#include "manager.h"
+#include "LoginSystem.h"
+#include "ManagerFunctions.h"
 
 //1
 void showListProcedure(vector<Account>& data, vector<Diseases>& diseases, string& strUserEnter, int peopleCount) {
@@ -39,7 +39,7 @@ void showSchedule(vector <Diseases> &diseases, string &strUserEnter) {
 
 //5
 void buyProcedure(vector<Account>& data, vector<Diseases>& diseases, string& strUserEnter) {
-    cout << "Введите имя человека, которому вы хотите назначить процедуру: " << endl << endl << ">> ";
+    cout << "Введите имя человека, которому вы хотите назначить процедуру: "; enterLine();
     cin >> strUserEnter;
     bool successFindPatient = false;
     bool successFindDisease = false;
@@ -55,14 +55,15 @@ void buyProcedure(vector<Account>& data, vector<Diseases>& diseases, string& str
         if (successFindPatient == true) {
             while (strUserEnter != "0") {
                 cout << endl << "Введите название процедуры, на которую вы хотите назначить пациента " << data[nameId].name << " " 
-                    << data[nameId].surname << ":" << endl << endl << ">> ";
+                    << data[nameId].surname << ":"; enterLine();
                 cin >> strUserEnter;
                 for (diseaseId = 0; diseases.size(); diseaseId++) {
                     if (diseases[diseaseId].diseasesName == strUserEnter) {
                         for (int k = 0; k < diseases[diseaseId].diseasesName.size(); k++) {
                             if (strUserEnter == data[nameId].client.diseaseName[k]) {
-                                cout << "Такая процедура уже имеется у пациента!" << endl << endl << "Введите 0, чтобы вернуться в главное меню: " 
-                                << endl << endl << ">> ";
+                                system("cls");
+                                cout << "Такая процедура уже имеется у пациента!" << endl << endl << 
+                                "Введите 0, чтобы вернуться в главное меню: "; enterLine();
                                 patientHadDisease = true;
                                 while (strUserEnter != "0") {
                                     cin >> strUserEnter; 
@@ -85,7 +86,7 @@ void buyProcedure(vector<Account>& data, vector<Diseases>& diseases, string& str
                 if (successFindDisease == true) {
                     system("cls");
                     cout << "Пациенту " << data[nameId].name << " " << data[nameId].surname << " была назначена процедура " << diseases[diseaseId].diseasesName <<
-                        endl << endl << "Введите 0, чтобы вернуться в главное меню:" << endl << endl << ">> ";
+                        endl << endl << "Введите 0, чтобы вернуться в главное меню:"; enterLine();
                         while (strUserEnter != "0") {
                             cin >>  strUserEnter;
                             if (strUserEnter!="0") {
@@ -95,13 +96,13 @@ void buyProcedure(vector<Account>& data, vector<Diseases>& diseases, string& str
                 }
                 else {
                     system("cls");
-                    cout << "Данная процедура не найдена! Попробуйте еще раз: " << endl << "Или напишите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+                    cout << "Данная процедура не найдена! Попробуйте еще раз: " << endl << "Или напишите 0, чтобы вернуться в главное меню"; enterLine();
                 }
             }
         }
         else {
             system("cls");
-            cout << "Данный пользователь не найден! Попробуйте еще раз: " << endl << "Или напишите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+            cout << "Данный пользователь не найден! Попробуйте еще раз: " << endl << "Или напишите 0, чтобы вернуться в главное меню"; enterLine();
         }
     }
 }
@@ -135,16 +136,16 @@ void findingProcedureFunction (vector<Account>& data, vector<Diseases>& diseases
         }
     }
     if (successFind == 0) {
-        cout << "Данная процедура не была найдена, попробуйте еще раз: " << endl << "Если вы хотите вернуться в главное меню, напишите 0." << endl << endl << ">> ";
+        cout << "Данная процедура не была найдена, попробуйте еще раз: " << endl << "Если вы хотите вернуться в главное меню, напишите 0."; enterLine();
     }
     else {
-        cout << endl << "Чтобы вернуться назад, напишите 0: " << endl << endl << ">> ";
+        cout << endl << "Чтобы вернуться назад, напишите 0: "; enterLine();
     }
 }
 
 //6 
 void findProcedure(vector<Account>& data, vector<Diseases>& diseases, string& strUserEnter, int peopleCount) {
-    cout << "Введите название процедуры, которую вы хотите найти: " << endl << endl << ">> ";
+    cout << "Введите название процедуры, которую вы хотите найти: "; enterLine();
     while (strUserEnter != "0") {
         findingProcedureFunction(data, diseases, strUserEnter, peopleCount);
     }
@@ -152,7 +153,7 @@ void findProcedure(vector<Account>& data, vector<Diseases>& diseases, string& st
 
 
 void personalMenu(bool programStatus, vector<Account>& data, int userEnter, int peopleCount, int beingTreatedCount, 
-                string strUserEnter, int personalCount, vector<Diseases> &diseases, int actualId, vector <int> todaysDate) {
+                string strUserEnter, int personalCount, vector<Diseases> &diseases, int actualId, string todaysDate) {
     while(programStatus) {
         system("cls");
 
@@ -166,7 +167,7 @@ void personalMenu(bool programStatus, vector<Account>& data, int userEnter, int 
         << "4. Показать расписание к процедурам" << endl
         << "5. Купить процедуру" << endl //Показывает список платных процедур с ценами, после выбранной процедуры выходит сообщение о приобретенной процедуре и записывается в файл
         << "6. Найти процедуру" << endl 
-        << "7. Выход" << endl << endl << ">> ";
+        << "7. Выход"; enterLine();
         
         cin >> userEnter; 
 

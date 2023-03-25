@@ -1,6 +1,7 @@
-#include "headers\manager.h"
-#include "headers\patient.h"
-#include "headers\personal.h"
+#include "headers\ManagerFunctions.h"
+#include "headers\PatientFunctions.h"
+#include "headers\PersonalFunctions.h"
+#include "headers\DirectorFunctions.h"
 
 void countTreatedPeople(vector<Account>& data, int peopleCount, int &beingTreatedCount, int &wasTreatedCount) {
     for (int i = 0; i < peopleCount; i++) {
@@ -32,7 +33,8 @@ void showPersonal (int peopleCount, vector<Account>& data) {
 
 int main()
 {
-    vector <int> todaysDate = {17, 3, 23};
+    string todaysDate;
+    determinateTodaysDate(todaysDate);
     int peopleCount = 12; //initial amount !!!IF YOU ADDING NEW PEOPLE TO DATABASE UPDATE THE VALUE OF IT!!!
     int diseasesCount = 9; //initial amount !!!IF YOU ADDING NEW DISEASES TO DATABASE UPDATE THE VALUE OF IT!!!
     vector <Account> data(peopleCount); 
@@ -52,7 +54,7 @@ int main()
     int personalCount = 0;
     string strUserEnter;
     bool systemOn = true;
-    
+
     while (systemOn == true) {  
         
         system("cls");
@@ -64,7 +66,7 @@ int main()
         countTreatedPeople(data, peopleCount, beingTreatedCount, wasTreatedCount);
         personalCount = peopleCount - wasTreatedCount;
         
-        cout << "Введите пожалуйста тип аккаунта:" << endl << endl << ">> ";
+        cout << "Введите пожалуйста тип аккаунта: "; enterLine();
         while (typeStatus == false) {
             
             cin >> enterType;
@@ -76,15 +78,15 @@ int main()
                 typeStatus = true;
             }
             else {
-                cout << "Неверный тип аккаунта! Повторите еще раз: " << endl << endl << ">> ";
+                cout << "Неверный тип аккаунта! Повторите еще раз: "; enterLine();
             }
         }
         
         while (loginStatus == false) {
             
-            cout << "Введите логин: " << endl << ">> ";
+            cout << "Введите логин: "; enterLine();
             cin >> enterLogin;
-            cout << "Введите пароль: " << endl << ">> ";
+            cout << endl << "Введите пароль: "; enterLine();
             cin >> enterPassword;
             system("cls");
             
@@ -106,7 +108,7 @@ int main()
         switch(access) {
             case '1':  
             { 
-                //directorMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, personalCount, diseases); 
+                directorMenu(programStatus, data, userEnter, peopleCount, beingTreatedCount, strUserEnter, personalCount, diseases, todaysDate); 
                 break; 
             }            
             case '2':  

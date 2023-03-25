@@ -1,5 +1,5 @@
 #pragma once
-#include "loginsystem.h"
+#include "LoginSystem.h"
 
 //first function of manager menu
 void showClientList(vector<Account>& data, string strUserEnter, int peopleCount) {
@@ -49,7 +49,7 @@ void findWithSurname(vector<Account>& data, string &strUserEnter, int peopleCoun
             cout << "Неправильно введена фамилия!" << endl << "Попробуйте ввести фамилию еще раз: " << endl;
         }
         else {
-            cout << endl << "Введите 0, чтобы вернуться назад: " << endl << endl << ">> ";
+            cout << endl << "Введите 0, чтобы вернуться назад: "; enterLine();
             while (strUserEnter!="0") {
                 cin >> strUserEnter;
                 if (strUserEnter != "0") {
@@ -69,7 +69,7 @@ void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount)
         }
     }
     if (successFind == 0) {
-        cout << "Данный пользователь не найден! Попробуйте еще раз, или напишите 0, чтобы выйти в меню: " << endl << endl << ">> ";
+        cout << "Данный пользователь не найден! Попробуйте еще раз, или напишите 0, чтобы выйти в меню: "; enterLine();
     }
     else if (successFind == 1) {
         for (int i = 0; i < peopleCount; i++) {
@@ -85,7 +85,7 @@ void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount)
             }
         }
         cout << endl << "Чтобы узнать информацию о другом пользователе, напишите его имя. " << endl 
-        << "Если же вы хотите вернуться в главное меню, введите 0: " << endl << endl << ">> ";
+        << "Если же вы хотите вернуться в главное меню, введите 0: "; enterLine();
     }
     else  {
         cout << "По запросу имени " << strUserEnter << " было найдено " << successFind << " пользователя: " << endl;
@@ -94,7 +94,7 @@ void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount)
                 cout << data[i].name << " " << data[i].surname << endl;
             }
         } 
-        cout << endl << "Введите фамилию нужного вам пользователя: " << endl << endl;
+        cout << endl << "Введите фамилию нужного вам пользователя: "; enterLine();
         while (strUserEnter != "0") { 
             findWithSurname(data, strUserEnter, peopleCount);
         }
@@ -106,7 +106,7 @@ void findFunction (vector<Account>& data, string &strUserEnter, int peopleCount)
 
 //third function of manager menu
 void findClient(vector<Account>& data, string strUserEnter, int peopleCount) {
-    cout << "Чтобы узнать всю информацию о пользователе, введите его имя: " << endl << ">> ";
+    cout << "Чтобы узнать всю информацию о пользователе, введите его имя: "; enterLine();
     cin >> strUserEnter;
     system("cls");
     findFunction(data, strUserEnter, peopleCount);
@@ -139,7 +139,7 @@ void findDisease(vector <Diseases> &diseases, string &strUserEnter, int peopleCo
     } 
     if (successFind == true) { 
         cout << "Нынешняя цена процедуры " << diseases[tempId].diseasesName << " - " << diseases[tempId].diseasesPrice << "$" << endl << "Введите новую цену: " << endl 
-        << "Если же вы хотите вернуться в главное меню, введите 0: "<< endl << endl << ">> "; 
+        << "Если же вы хотите вернуться в главное меню, введите 0: "; enterLine();
         cin >> tempInput; 
         if (tempInput <= 0) { 
             strUserEnter = "0";  
@@ -149,14 +149,13 @@ void findDisease(vector <Diseases> &diseases, string &strUserEnter, int peopleCo
             diseases[tempId].diseasesPrice = tempInput; 
             system("cls");
             cout << "Новая цена процедуры " << diseases[tempId].diseasesName << ": " << tempInput << "$" << endl 
-            << "Если вы хотите изменить цену для другой процедуры, введите ее название: " << endl << "Или напишите 0 чтобы вернуться в главное меню: " << endl
-            << endl << ">> ";
+            << "Если вы хотите изменить цену для другой процедуры, введите ее название: " << endl << "Или напишите 0 чтобы вернуться в главное меню: "; enterLine();
             cin >> strUserEnter;
             system("cls");
         } 
     } 
     else { 
-        cout << "Данная процедура не найдена, попробуйте еще раз: " << endl << endl << ">> "; 
+        cout << "Данная процедура не найдена, попробуйте еще раз: "; enterLine();
         cin >> strUserEnter;
         system("cls");
     } 
@@ -164,7 +163,7 @@ void findDisease(vector <Diseases> &diseases, string &strUserEnter, int peopleCo
  
 //fifth function of manager menu
 void changePrice(vector <Diseases> &diseases, string &strUserEnter, int peopleCount){ 
-    cout << "Введите название процедуры, которой хотите изменить цену: " << endl << "Если же вы хотите вернуться в главное меню, введите 0: " << endl << endl << ">> "; 
+    cout << "Введите название процедуры, которой хотите изменить цену: " << endl << "Если же вы хотите вернуться в главное меню, введите 0: "; enterLine();
     cin >> strUserEnter; 
     system("cls"); 
     while (strUserEnter!="0") { 
@@ -184,13 +183,13 @@ void changeProcedureTime (vector <Diseases> &diseases, string &strUserEnter, int
         }
     }
     if (successFind == true) {
-        cout << "Введите новое время в формате ЧЧ:ММ для процедуры " << diseases[tempId].diseasesName << ": " << endl << "Если вы передумали, напишите 0:" << endl << endl << ">> ";
+        cout << "Введите новое время в формате ЧЧ:ММ для процедуры " << diseases[tempId].diseasesName << ": " << endl << "Если вы передумали, напишите 0:"; enterLine();
         cin >> strUserEnter;
         if (strUserEnter != "0") {
             diseases[tempId].diseasesTime = strUserEnter;
             system("cls");
             cout << "Новое время для процедуры было успешно установлено!" << endl << "Введите 0, если хотите вернуться в главное меню" << endl 
-            << "Введите 1, если вы хотите сменить время другой процедуре: " << endl << endl << ">> ";
+            << "Введите 1, если вы хотите сменить время другой процедуре: "; enterLine();
             while (strUserEnter != "0" || strUserEnter != "1") {
                 cin >> strUserEnter;
                 if (strUserEnter == "1") {
@@ -201,7 +200,7 @@ void changeProcedureTime (vector <Diseases> &diseases, string &strUserEnter, int
                     return ;
                 }
                 else {
-                    cout << "Неверно введено число! Попробуйте еще раз: " << endl << endl << ">> ";
+                    cout << "Неверно введено число! Попробуйте еще раз: "; enterLine();
                 }
             }
         }
@@ -216,7 +215,7 @@ void changeProcedureTime (vector <Diseases> &diseases, string &strUserEnter, int
             system("cls");
         }
         else {
-            cout << "Данная процедура не была найдена! Попробуйте еще раз: " << endl << "Или введите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+            cout << "Данная процедура не была найдена! Попробуйте еще раз: " << endl << "Или введите 0, чтобы вернуться в главное меню"; enterLine();
             cin >> strUserEnter;
             system("cls");
         }
@@ -236,13 +235,13 @@ void changeProcedureName(vector <Diseases> &diseases, string &strUserEnter, int 
         }
     }
     if (successFind == true) {
-        cout << "Введите новое название для процедуры " << diseases[tempId].diseasesName << ": " << endl << "Если вы передумали, напишите 0:" << endl << endl << ">> ";
+        cout << "Введите новое название для процедуры " << diseases[tempId].diseasesName << ": " << endl << "Если вы передумали, напишите 0:"; enterLine();
         cin >> strUserEnter;
         if (strUserEnter != "0") {
             diseases[tempId].diseasesName = strUserEnter;
             system("cls");
             cout << "Новое название процедуры было успешно установлено!" << endl << "Введите 0, если хотите вернуться в главное меню" << endl 
-            << "Введите 1, если вы хотите сменить название другой процедуры: " << endl << endl << ">> ";
+            << "Введите 1, если вы хотите сменить название другой процедуры: "; enterLine();
             while (strUserEnter != "0" || strUserEnter != "1") {
                 cin >> strUserEnter;
                 if (strUserEnter == "0") {
@@ -253,7 +252,7 @@ void changeProcedureName(vector <Diseases> &diseases, string &strUserEnter, int 
                     return ;
                 }
                 else {
-                    cout << "Неверно введено число! Попробуйте еще раз: " << endl << endl << ">> ";
+                    cout << "Неверно введено число! Попробуйте еще раз: "; enterLine();
                 }
             }
         }
@@ -268,7 +267,7 @@ void changeProcedureName(vector <Diseases> &diseases, string &strUserEnter, int 
             system("cls");
         }
         else {
-            cout << "Данная процедура не была найдена! Попробуйте еще раз: " << endl << "Или введите 0, чтобы вернуться в главное меню" << endl << endl << ">> ";
+            cout << "Данная процедура не была найдена! Попробуйте еще раз: " << endl << "Или введите 0, чтобы вернуться в главное меню"; enterLine();
             cin >> strUserEnter;
             system("cls");
         }
@@ -281,7 +280,7 @@ void changeTimeOrProcedureName(vector <Diseases> &diseases, string &strUserEnter
         cin >> strUserEnter;
         if (strUserEnter == "1") {
             system("cls");
-            cout << "Введите название процедуры: " << endl << endl << ">> ";
+            cout << "Введите название процедуры: "; enterLine();
             cin >> strUserEnter;
             system("cls");
             while (strUserEnter != "0") {
@@ -290,7 +289,7 @@ void changeTimeOrProcedureName(vector <Diseases> &diseases, string &strUserEnter
         }
         else if (strUserEnter == "2") {
             system("cls");
-            cout << "Введите название процедуры: " << endl << endl << ">> ";
+            cout << "Введите название процедуры: "; enterLine();
             cin >> strUserEnter;
             system("cls");
             while (strUserEnter != "0") {
@@ -298,7 +297,7 @@ void changeTimeOrProcedureName(vector <Diseases> &diseases, string &strUserEnter
             }
         }
         else {
-            cout << "Неверно введено число, попробуйте еще раз: " << endl << endl << ">> ";
+            cout << "Неверно введено число, попробуйте еще раз: "; enterLine();
         }
     }
 }
@@ -317,7 +316,7 @@ void showMaxPersonVisits(vector<Account>& data, int &userEnter, int peopleCount,
         while (userEnter != 0) {
             system("cls");
             cout << "Наибольшее количество посещений у пользователя " << data[tempInt].name  << " " << data[tempInt].surname << endl << "Всего посещений: " << maxVisits << endl << endl
-                << "Чтобы вернуться в главное меню, напишите 0: " << endl << ">> ";
+                << "Чтобы вернуться в главное меню, напишите 0: " ; enterLine();
             cin >> userEnter;
             system ("cls");
         } 
@@ -338,7 +337,7 @@ void showMinPersonVisits(vector<Account>& data, int &userEnter, int peopleCount,
         while (userEnter != 0) {
             system("cls");
             cout << "Наименьшее количество посещений у пользователя " << data[tempInt].name  << " " << data[tempInt].surname << endl << "Всего посещений: " << minVisits << endl << endl
-                << "Чтобы вернуться в главное меню, напишите 0: " << endl << ">> ";
+                << "Чтобы вернуться в главное меню, напишите 0: "; enterLine();
             cin >> userEnter;
             system ("cls");
         } 
@@ -362,7 +361,7 @@ void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int p
         << "6. Изменить время/название процедур" << endl 
         << "7. Показать посетителя с максимальным количеством посещений" << endl
         << "8. Показать посетителя с минимальным количеством посещений" << endl 
-        << "9. Выход" << endl << endl << ">> ";
+        << "9. Выход"; enterLine();
         
         cin >> userEnter; 
 
@@ -408,7 +407,7 @@ void managerMenu(bool programStatus, vector<Account>& data, int userEnter, int p
             { 
                 system("cls"); 
                 cout << "Введите 1, чтобы изменить время процедуры:" << endl << "Введите 2, чтобы изменить название процедуры: " << endl 
-                << "Введите 0, чтобы вернуться в главное меню: " << endl << endl << ">> ";
+                << "Введите 0, чтобы вернуться в главное меню: "; enterLine();
                 changeTimeOrProcedureName(diseases, strUserEnter, peopleCount); 
                 break;
             }
