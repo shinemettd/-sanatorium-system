@@ -39,22 +39,19 @@ int main()
     determinateTodaysDate(todaysDate);
     int peopleCount = 12; //initial amount !!!IF YOU ADDING NEW PEOPLE TO DATABASE UPDATE THE VALUE OF IT!!!
     int diseasesCount = 9; //initial amount !!!IF YOU ADDING NEW DISEASES TO DATABASE UPDATE THE VALUE OF IT!!!
-    vector <Account> data(peopleCount); 
-    vector <Diseases> diseases(diseasesCount);
+    vector <Account> data(peopleCount); //creating vector which will save all account info database
+    vector <Diseases> diseases(diseasesCount); //creating vector which will save all diseases database
     fillDiseases(diseases); //filling diseases database
     dataBase(data, diseases); //filling personal database
     //showPersonal(peopleCount, data);
-    bool typeStatus;
-    bool loginStatus;
-    bool programStatus;
+    bool typeStatus, loginStatus, programStatus;
     char access;
-    string enterType, enterLogin, enterPassword;
-    int actualId;
-    int userEnter;
+    string enterType, enterLogin, enterPassword, strUserEnter;
+    int actualId, userEnter;
     int beingTreatedCount = 0;
     int wasTreatedCount = 0;
     int personalCount = 0;
-    string strUserEnter;
+    int systemUsageCount = 0;
     bool systemOn = true;
 
     while (systemOn == true) {  
@@ -68,10 +65,18 @@ int main()
         countTreatedPeople(data, peopleCount, beingTreatedCount, wasTreatedCount);
         personalCount = peopleCount - wasTreatedCount;
         
+        if (systemUsageCount > 0) {
+            cout << "Если вы хотите полностью выйти из программы, напишите exit." << endl << endl;
+        }
+
         cout << "Введите тип аккаунта: "; enterLine();
         while (typeStatus == false) {
             
             cin >> enterType;
+            if (enterType == "exit") {
+                return 0;
+            }
+
             system("cls");
             
             enterType.erase(remove(enterType.begin(), enterType.end(), ' '), enterType.end()); //deleting possible accidental spaces from type
@@ -103,7 +108,7 @@ int main()
             }
             
         } 
-        
+
         system("cls");
         cout << "Добро пожаловать в систему, " << data[actualId].surname << " " << data[actualId].name << "!" << endl;
         programStatus = true;
@@ -133,11 +138,13 @@ int main()
                 cout << "Error";
             }
         }
+        
+        systemUsageCount++;
+
         if (programStatus == false) {
             bool typeStatus = false;
             bool loginStatus = false;
         }
-        system("pause");
     }
     return 0;
 }

@@ -229,18 +229,22 @@ void directorMenu(bool programStatus, vector<Account>& data, int userEnter, int 
         << "3. Изменить данные аккаунта" << endl 
         << "4. Удалить существующий аккаунт" << endl
         << "5. Показать список посетителей" << endl 
-        << "6. " << endl 
-        << "7. " << endl
-        << "8. " << endl 
-        << "9. Выход"; enterLine();
+        << "6. Показать количество посетителей" << endl 
+        << "7. Поиск посетителя" << endl 
+        << "8. Показать список процедур" << endl
+        << "9. Изменить цену для процедур" << endl 
+        << "10. Изменить время/название процедур" << endl 
+        << "11. Показать посетителя с максимальным количеством посещений" << endl
+        << "12. Показать посетителя с минимальным количеством посещений" << endl 
+        << "13. Выход"; enterLine();
         
         cin >> userEnter; 
 
-        if ((userEnter >= 1) && (userEnter <= 9)) {
+        if ((userEnter >= 1) && (userEnter <= 13)) {
             userEnter = userEnter;
         }
         else {
-            userEnter = 9;
+            userEnter = 13;
         }
 
         switch(userEnter) {
@@ -274,25 +278,51 @@ void directorMenu(bool programStatus, vector<Account>& data, int userEnter, int 
                 showClientList(data, strUserEnter, peopleCount);
                 break;
             }
-            case 6:  
-            { 
-                system("cls"); 
-                
+            case 6:
+            {
+                system("cls");
+                showClientCount(data, strUserEnter, peopleCount, beingTreatedCount);
                 break;
             }
             case 7:
             {
                 system("cls");
-                
+                findClient(data, strUserEnter, peopleCount); 
                 break;
             }
             case 8:
             {
                 system("cls");
-                
+                showAllDiseases (diseases, strUserEnter);
+                break;
+            }
+            case 9:  
+            { 
+                system("cls"); 
+                changePrice(diseases, strUserEnter, peopleCount); 
+                break;
+            }
+            case 10:  
+            { 
+                system("cls"); 
+                cout << "Введите 1, чтобы изменить время процедуры:" << endl << "Введите 2, чтобы изменить название процедуры: " << endl 
+                << "Введите 0, чтобы вернуться в главное меню: "; enterLine();
+                changeTimeOrProcedureName(diseases, strUserEnter, peopleCount); 
+                break;
+            }
+            case 11:
+            {
+                system("cls");
+                showMaxPersonVisits(data, userEnter, peopleCount, personalCount);
+                break;
+            }
+            case 12:
+            {
+                system("cls");
+                showMinPersonVisits(data, userEnter, peopleCount, personalCount);
                 break;                
             }
-            case 9:
+            case 13:
             {
                 programStatus = false;
                 break;
