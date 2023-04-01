@@ -108,7 +108,7 @@ void dataBase (vector<Account>& data, vector<Diseases>& diseases) {
     data[6].type = "patient";
     data[6].login = "lepsthebest";
     data[6].password = "ktoeslineleps";
-    data[6].name = "Nikita";
+    data[6].name = "Grigoriy";
     data[6].surname = "Leps";
     data[6].height = 178;
     data[6].weight = 81;

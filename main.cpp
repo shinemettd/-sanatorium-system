@@ -35,6 +35,7 @@ void showPersonal (int peopleCount, vector<Account>& data) {
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     string todaysDate;
     determinateTodaysDate(todaysDate);
     int peopleCount = 12; //initial amount !!!IF YOU ADDING NEW PEOPLE TO DATABASE UPDATE THE VALUE OF IT!!!
@@ -73,6 +74,7 @@ int main()
         while (typeStatus == false) {
             
             cin >> enterType;
+            
             if (enterType == "exit") {
                 return 0;
             }

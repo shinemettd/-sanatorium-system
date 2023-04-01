@@ -71,7 +71,7 @@ void addPersonal (vector<Account>& data, string &strUserEnter, int userEnter, in
             newAccount.birthday = strUserEnter;
 
             newAccount.ID = peopleCount;
-
+            newAccount.client.stayDay = 1;
             fullRegistration = true;
         }
         else {
